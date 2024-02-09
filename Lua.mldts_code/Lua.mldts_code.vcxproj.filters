@@ -18,6 +18,9 @@
     <ClCompile Include="Lua.mldts_code.cpp">
       <Filter>Исходные файлы</Filter>
     </ClCompile>
+    <ClCompile Include="Module\crWinOptions.cpp">
+      <Filter>Исходные файлы</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="LuaCode\main.lua" />
