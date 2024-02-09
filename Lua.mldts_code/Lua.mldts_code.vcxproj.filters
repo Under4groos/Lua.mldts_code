@@ -19,4 +19,30 @@
       <Filter>Исходные файлы</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="LuaCode\main.lua" />
+    <None Include="Lua\lib\lua5.1.dll" />
+    <None Include="Lua\lib\lua51.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Lua\include\lauxlib.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Lua\include\lua.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Lua\include\lua.hpp">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Lua\include\luaconf.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+    <ClInclude Include="Lua\include\lualib.h">
+      <Filter>Файлы заголовков</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Lua\lib\lua5.1.lib" />
+    <Library Include="Lua\lib\lua51.lib" />
+  </ItemGroup>
 </Project>

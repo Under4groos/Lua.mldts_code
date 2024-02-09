@@ -107,6 +107,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <LanguageStandard_C>stdc17</LanguageStandard_C>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,6 +133,22 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Lua.mldts_code.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="LuaCode\main.lua" />
+    <None Include="Lua\lib\lua5.1.dll" />
+    <None Include="Lua\lib\lua51.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Lua\include\lauxlib.h" />
+    <ClInclude Include="Lua\include\lua.h" />
+    <ClInclude Include="Lua\include\lua.hpp" />
+    <ClInclude Include="Lua\include\luaconf.h" />
+    <ClInclude Include="Lua\include\lualib.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Lua\lib\lua5.1.lib" />
+    <Library Include="Lua\lib\lua51.lib" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
