@@ -112,8 +112,8 @@ extern "C" int create_window(lua_State * L)
         CW_USEDEFAULT, CW_USEDEFAULT, w, h,
         NULL, NULL, NULL, NULL);
 
-    cout << windowHandle << endl;
-    ShowWindow(windowHandle, SW_RESTORE);
+   
+    ShowWindow(windowHandle, SW_SHOW);
     
 
     lua_pushinteger(L,  (int)windowHandle);
@@ -121,18 +121,51 @@ extern "C" int create_window(lua_State * L)
     
     return 1;
 }
+
+extern "C" int _window_move(lua_State * L)
+{
+
+    int hwnd = lua_tointeger(L, 1);
+    int x = lua_tointeger(L, 2);
+    int y = lua_tointeger(L, 3);
+    int nWidth = lua_tointeger(L, 4);
+    int nHeight = lua_tointeger(L, 5);
+
+
+    bool b = MoveWindow(
+        (HWND)hwnd,
+        x,
+        y,
+        nWidth,
+        nHeight,
+        true
+    );
+    
+    lua_pushboolean(L, b);
+
+
+    return 1;
+}
+
+
+
 char buff[256];
 int error;
  
 DWORD WINAPI error_lua_stack(void* b) {
+    cout << "Event" << endl;
     while (fgets(buff, sizeof(buff), stdin) != NULL) {
         error = luaL_loadstring(lua, buff) || lua_pcall(lua, 0, 0, 0);
         if (error) {
-            fprintf(stderr, "%s\n", lua_tostring(lua, -1));
+           /* fprintf(stderr, "%s\n", lua_tostring(lua, -1));*/
+
+            cout << stderr << lua_tostring(lua, -1) << endl;
+
             lua_pop(lua, 1);
 
         }
     }
+     
     return 0;
 }
 
@@ -141,20 +174,21 @@ int main()
 {
 
     lua = luaL_newstate();
+    luaL_openlibs(lua);
+
+
 
     lua_register(lua, "GetForegroundWindow", GetFWindow);
     lua_register(lua, "Sleep", _Sleep);
-
     lua_register(lua, "Sleep", _Sleep);
- 
     lua_register(lua, "create_window", create_window);
-    luaL_openlibs(lua);
-    luaL_dofile(lua, "LuaCode/main.lua");  
+    lua_register(lua, "MoveWindow", _window_move);
+   
      
 
     CreateThread(NULL, 0, error_lua_stack, NULL, NULL, NULL);
 
-   
+    luaL_dofile(lua, "LuaCode/main.lua");
     MSG messages;
     while (GetMessage(&messages, NULL, 0, 0) > 0)
     {
